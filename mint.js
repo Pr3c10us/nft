@@ -213,7 +213,7 @@ function timeout(ms) {
 
 async function pre_main() {
     const amount = 1;
-    const mintId = 3;
+    const mintId = 1;
     const affiliate = "0x0000000000000000000000000000000000000000";
     const contractAddress = process.env.CONTRACT_ADDRESS;
 
