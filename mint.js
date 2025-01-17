@@ -53,7 +53,7 @@ const CONFIG = {
     chainId: 42161,
     name: 'Arbitrum One',
     currency: 'Ethereum',
-    rpcUrl: 'https://arb1.arbitrum.io/rpc/',
+    rpcUrl: 'https://arbitrum.llamarpc.com/',
     explorer: 'https://arbiscan.io/tx/',
     gasMultiplier: 1.5 // Add 20% to estimated gas price
 };
@@ -177,8 +177,8 @@ async function processMintingForAllWallets(walletManager, contractAddress, amoun
     const mintingPromises = [];
 
     for (const wallet of walletManager.wallets) {
-        // Execute 54 transactions concurrently for each wallet
-        for (let i = 0; i < 5; i++) {
+        // Execute 10 transactions concurrently for each wallet
+        for (let i = 0; i < 10; i++) {
             mintingPromises.push(
                 batchMintNFTs(wallet, contractAddress, amount, mintId, affiliate).catch((error) => {
                     console.error(`Failed minting for wallet ${wallet.address} (attempt ${i + 1}):`, error.message);
@@ -193,9 +193,9 @@ async function processMintingForAllWallets(walletManager, contractAddress, amoun
 
     // Log all results, including failures
     results.forEach((result, index) => {
-        const walletIndex = Math.floor(index / 54); // Determine which wallet executed the transaction
+        const walletIndex = Math.floor(index / 10); // Determine which wallet executed the transaction
         const walletAddress = walletManager.wallets[walletIndex].address;
-        const attemptNumber = (index % 54) + 1;
+        const attemptNumber = (index % 10) + 1;
 
         if (result.status === 'fulfilled') {
             console.log(`Success for wallet ${walletAddress} (attempt ${attemptNumber}): ${result.value.hash}`);
@@ -284,11 +284,11 @@ async function pre_main() {
 const main = async () => {
     let count = 0;
     let cont = true;
-    while (cont) {
+    // while (cont) {
         await pre_main().then(r => console.log({count}))
         // setTimeout(() => {
         // }, 10000)
         count++;
-    }
+    // }
 }
 main()
