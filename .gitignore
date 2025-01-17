@@ -1,0 +1,5 @@
+/.env
+/.idea
+/abi.js
+/mintWithProof.js
+/node_modules
