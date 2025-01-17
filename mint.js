@@ -284,11 +284,11 @@ async function pre_main() {
 const main = async () => {
     let count = 0;
     let cont = true;
-    // while (cont) {
+    while (cont) {
         await pre_main().then(r => console.log({count}))
         // setTimeout(() => {
         // }, 10000)
         count++;
-    // }
+    }
 }
 main()
